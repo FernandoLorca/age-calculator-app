@@ -6,6 +6,7 @@ function App() {
   const [month, setMonth] = useState('');
   const [year, setYear] = useState('');
 
+  // actualizador de estados del valor de los input que el usuario ingresó
   const handleDayChange = e => setDay(e.target.value);
   const handleMonthChange = e => setMonth(e.target.value);
   const handleYearChange = e => setYear(e.target.value);
@@ -15,16 +16,19 @@ function App() {
   const [monthResult, setMonthResult] = useState('');
   const [yearResult, setYearResult] = useState('');
 
+  // creación del objeto date que nos trae las fechas actuales
   const dateNow = new Date();
   const dayNow = dateNow.getDate();
   const monthNow = dateNow.getMonth() + 1;
   const yearNow = dateNow.getFullYear();
 
+  // Creacion del objeto date en donde alojamos los valores ingresados por el cliente
   const dateBirth = new Date(year, month - 1, day);
   const dayBirth = dateBirth.getDate();
   const monthBirth = dateBirth.getMonth() + 1;
   const yearBirth = dateBirth.getFullYear();
 
+  // función que calcula año, mes y día de vida
   const handleCalculateAge = () => {
     setDayResult(dayBirth - monthNow);
     setMonthResult(monthBirth - monthNow);
@@ -79,21 +83,44 @@ function App() {
           </div>
         </div>
         <div className="flex flex-col gap-2">
-          <p className="text-black text-7xl font-bold italic">
-            <span className="text-purple-800">
-              {year === '' ? '--' : yearResult}
+          <p className="flex text-black text-7xl font-bold italic">
+            <span
+              className={`text-purple-800 ${yearResult !== '' ? 'hidden' : ''}`}
+            >
+              --
+            </span>
+            <span
+              className={`text-purple-800 ${yearResult !== '' ? 'block' : ''}`}
+            >
+              {yearResult}
             </span>
             years
           </p>
-          <p className="text-black text-7xl font-bold italic">
-            <span className="text-purple-800">
-              {month === '' ? '--' : monthResult}
+          <p className="flex text-black text-7xl font-bold italic">
+            <span
+              className={`text-purple-800 ${
+                monthResult !== '' ? 'hidden' : ''
+              }`}
+            >
+              --
+            </span>
+            <span
+              className={`text-purple-800 ${dayResult !== '' ? 'block' : ''}`}
+            >
+              {monthResult}
             </span>
             months
           </p>
-          <p className="text-black text-7xl font-bold italic">
-            <span className="text-purple-800">
-              {day === '' ? '--' : dayResult}
+          <p className="flex text-black text-7xl font-bold italic">
+            <span
+              className={`text-purple-800 ${dayResult !== '' ? 'hidden' : ''}`}
+            >
+              --
+            </span>
+            <span
+              className={`text-purple-800 ${dayResult !== '' ? 'block' : ''}`}
+            >
+              {dayResult}
             </span>
             days
           </p>
