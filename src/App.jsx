@@ -47,7 +47,7 @@ function App() {
       setDayError('This field is requiered');
       setBorderErrorColorDay('border-red-500 focus:ring focus:ring-red-500');
       setlabelErrorColorDay('text-red-500');
-    } else if (value > maxDayPosible) {
+    } else if (value > maxDayPosible || value <= 0) {
       setDayError('Must be a valid day');
       setBorderErrorColorDay('border-red-500 focus:ring focus:ring-red-500');
       setlabelErrorColorDay('text-red-500');
@@ -65,7 +65,7 @@ function App() {
       setMonthError('This field is requiered');
       setBorderErrorColorMonth('border-red-500 focus:ring focus:ring-red-500');
       setlabelErrorColorMonth('text-red-500');
-    } else if (value > maxMonthPosible) {
+    } else if (value > maxMonthPosible || value <= 0) {
       setMonthError('Must be a valid month');
       setBorderErrorColorMonth('border-red-500 focus:ring focus:ring-red-500');
       setlabelErrorColorMonth('text-red-500');
@@ -83,7 +83,7 @@ function App() {
       setYearError('This field is requiered');
       setBorderErrorColorDaYear('border-red-500 focus:ring focus:ring-red-500');
       setlabelErrorColorYear('text-red-500');
-    } else if (value >= maxYearPosible) {
+    } else if (value >= maxYearPosible || value <= 0) {
       setYearError('Must be in the past');
       setBorderErrorColorDaYear('border-red-500 focus:ring focus:ring-red-500');
       setlabelErrorColorYear('text-red-500');
@@ -101,7 +101,7 @@ function App() {
       setBorderErrorColorDay('border-red-500 focus:ring focus:ring-red-500');
       return setlabelErrorColorDay('text-red-500');
     }
-    if (day > maxDayPosible) {
+    if (day > maxDayPosible || day <= 0) {
       setDayError('Must be a valid day');
       setBorderErrorColorDay('border-red-500 focus:ring focus:ring-red-500');
       return setlabelErrorColorDay('text-red-500');
@@ -111,7 +111,7 @@ function App() {
       setBorderErrorColorMonth('border-red-500 focus:ring focus:ring-red-500');
       return setlabelErrorColorMonth('text-red-500');
     }
-    if (month > maxMonthPosible) {
+    if (month > maxMonthPosible || month <= 0) {
       setMonthError('Must be a valid month');
       setBorderErrorColorMonth('border-red-500 focus:ring focus:ring-red-500');
       return setlabelErrorColorMonth('text-red-500');
@@ -121,7 +121,7 @@ function App() {
       setBorderErrorColorDaYear('border-red-500 focus:ring focus:ring-red-500');
       return setlabelErrorColorYear('text-red-500');
     }
-    if (year > maxYearPosible) {
+    if (year > maxYearPosible || year <= 0) {
       setYearError('Must be in the past');
       setBorderErrorColorDaYear('border-red-500 focus:ring focus:ring-red-500');
       return setlabelErrorColorYear('text-red-500');
