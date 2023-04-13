@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function App() {
   // manejadores de estados de los input
@@ -23,11 +23,60 @@ function App() {
   const monthBirth = dateBirth.getMonth() + 1;
   const yearBirth = dateBirth.getFullYear();
 
-  // estados que validarán que los campos tengan datos en los input
-  const [dayError, setdayError] = useState('');
-  const [monthError, setmonthError] = useState('');
-  const [yearError, setyearError] = useState('');
-  const [borderInputError, setborderInputError] = useState('border-slate-200');
+  // estados donde se guardaran los errores generados en los input
+  const [dayError, setDayError] = useState('');
+  const [monthError, setMonthError] = useState('');
+  const [yearError, setYearError] = useState('');
+  const [borderErrorColor, setborderErrorColor] = useState('');
+  const [labelErrorColor, setlabelErrorColor] = useState('');
+
+  // funciones que validan errores en los input
+  const maxDayPosible = 31;
+  const maxMonthPosible = 12;
+  const maxYearPosible = dateNow.getFullYear();
+
+  const handleDayChange = e => {
+    const value = e.target.value;
+    setDay(value);
+
+    if (value === '') {
+      setDayError('This field is requiered');
+      setborderErrorColor('focus:ring focus:ring-red-500');
+      setlabelErrorColor('text-red-500');
+    } else if (value > maxDayPosible) {
+      setDayError('Must be a valid day');
+      setborderErrorColor('focus:ring focus:ring-red-500');
+      setlabelErrorColor('text-red-500');
+    } else {
+      setDayError('');
+      setborderErrorColor('focus:ring-black');
+      setlabelErrorColor('text-slate-700');
+    }
+  };
+  const handleMonthChange = e => {
+    const value = e.target.value;
+    setMonth(value);
+
+    if (value === '') {
+      setMonthError('This field is requiered');
+    } else if (value > maxMonthPosible) {
+      setMonthError('Must be a valid month');
+    } else {
+      setMonthError('');
+    }
+  };
+  const handleYearChange = e => {
+    const value = e.target.value;
+    setYear(value);
+
+    if (value === '') {
+      setYearError('This field is requiered');
+    } else if (value >= maxYearPosible) {
+      setYearError('Must be in the past');
+    } else {
+      setYearError('');
+    }
+  };
 
   // función que calcula año, mes y día de vida
   const handleCalculateAge = () => {
@@ -44,11 +93,13 @@ function App() {
       <div className="bg-white p-10 card">
         <div className="flex gap-5">
           <div className="text-xs">
-            <p className="pb-2 font-bold">DAY</p>
+            <p className={`pb-2 font-bold ${labelErrorColor}`}>DAY</p>
             <input
               type="number"
-              className={`border-2 rounded h-8 pl-5 py-5 text-lg font-bold text-black hover:border-black ${borderInputError}`}
+              className={`border-2 rounded h-8 pl-5 py-5 text-lg font-bold text-black border-slate-300 focus:outline-none focus:ring focus:ring-black ${borderErrorColor}`}
               placeholder="DD"
+              value={day}
+              onChange={handleDayChange}
             />
             <p className="py-1 text-red-500">{dayError}</p>
           </div>
@@ -56,8 +107,10 @@ function App() {
             <p className="pb-2 font-bold">MONTH</p>
             <input
               type="number"
-              className={`border-2 rounded h-8 pl-5 py-5 text-lg font-bold text-black hover:border-black ${borderInputError}`}
+              className={`border-2 rounded h-8 pl-5 py-5 text-lg font-bold text-black hover:border-black`}
               placeholder="MM"
+              value={month}
+              onChange={handleMonthChange}
             />
             <p className="py-1 text-red-500">{monthError}</p>
           </div>
@@ -65,8 +118,10 @@ function App() {
             <p className="pb-2 font-bold">YEAR</p>
             <input
               type="number"
-              className={`border-2 rounded h-8 pl-5 py-5 text-lg font-bold text-black hover:border-black ${borderInputError}`}
+              className={`border-2 rounded h-8 pl-5 py-5 text-lg font-bold text-black hover:border-black`}
               placeholder="YYYY"
+              value={year}
+              onChange={handleYearChange}
             />
             <p className="py-1 text-red-500">{yearError}</p>
           </div>
