@@ -27,8 +27,12 @@ function App() {
   const [dayError, setDayError] = useState('');
   const [monthError, setMonthError] = useState('');
   const [yearError, setYearError] = useState('');
-  const [borderErrorColor, setborderErrorColor] = useState('');
-  const [labelErrorColor, setlabelErrorColor] = useState('');
+  const [borderErrorColorDay, setBorderErrorColorDay] = useState('');
+  const [borderErrorColorMonth, setBorderErrorColorMonth] = useState('');
+  const [borderErrorColorYear, setBorderErrorColorDaYear] = useState('');
+  const [labelErrorColorDay, setlabelErrorColorDay] = useState('');
+  const [labelErrorColorMonth, setlabelErrorColorMonth] = useState('');
+  const [labelErrorColorYear, setlabelErrorColorYear] = useState('');
 
   // funciones que validan errores en los input
   const maxDayPosible = 31;
@@ -41,16 +45,16 @@ function App() {
 
     if (value === '') {
       setDayError('This field is requiered');
-      setborderErrorColor('focus:ring focus:ring-red-500');
-      setlabelErrorColor('text-red-500');
+      setBorderErrorColorDay('border-red-500 focus:ring focus:ring-red-500');
+      setlabelErrorColorDay('text-red-500');
     } else if (value > maxDayPosible) {
       setDayError('Must be a valid day');
-      setborderErrorColor('focus:ring focus:ring-red-500');
-      setlabelErrorColor('text-red-500');
+      setBorderErrorColorDay('border-red-500 focus:ring focus:ring-red-500');
+      setlabelErrorColorDay('text-red-500');
     } else {
       setDayError('');
-      setborderErrorColor('focus:ring-black');
-      setlabelErrorColor('text-slate-700');
+      setBorderErrorColorDay('focus:ring-black');
+      setlabelErrorColorDay('text-slate-700');
     }
   };
   const handleMonthChange = e => {
@@ -59,10 +63,16 @@ function App() {
 
     if (value === '') {
       setMonthError('This field is requiered');
+      setBorderErrorColorMonth('border-red-500 focus:ring focus:ring-red-500');
+      setlabelErrorColorMonth('text-red-500');
     } else if (value > maxMonthPosible) {
       setMonthError('Must be a valid month');
+      setBorderErrorColorMonth('border-red-500 focus:ring focus:ring-red-500');
+      setlabelErrorColorMonth('text-red-500');
     } else {
       setMonthError('');
+      setBorderErrorColorMonth('focus:ring-black');
+      setlabelErrorColorMonth('text-slate-700');
     }
   };
   const handleYearChange = e => {
@@ -71,10 +81,16 @@ function App() {
 
     if (value === '') {
       setYearError('This field is requiered');
+      setBorderErrorColorDaYear('border-red-500 focus:ring focus:ring-red-500');
+      setlabelErrorColorYear('text-red-500');
     } else if (value >= maxYearPosible) {
       setYearError('Must be in the past');
+      setBorderErrorColorDaYear('border-red-500 focus:ring focus:ring-red-500');
+      setlabelErrorColorYear('text-red-500');
     } else {
       setYearError('');
+      setBorderErrorColorDaYear('focus:ring-black');
+      setlabelErrorColorYear('text-slate-700');
     }
   };
 
@@ -93,10 +109,10 @@ function App() {
       <div className="bg-white p-10 card">
         <div className="flex gap-5">
           <div className="text-xs">
-            <p className={`pb-2 font-bold ${labelErrorColor}`}>DAY</p>
+            <p className={`pb-2 font-bold ${labelErrorColorDay}`}>DAY</p>
             <input
               type="number"
-              className={`border-2 rounded h-8 pl-5 py-5 text-lg font-bold text-black border-slate-300 focus:outline-none focus:ring focus:ring-black ${borderErrorColor}`}
+              className={`border-2 rounded h-8 pl-5 py-5 text-lg font-bold text-black focus:outline-none focus:ring focus:ring-black ${borderErrorColorDay}`}
               placeholder="DD"
               value={day}
               onChange={handleDayChange}
@@ -104,10 +120,10 @@ function App() {
             <p className="py-1 text-red-500">{dayError}</p>
           </div>
           <div className="text-xs">
-            <p className="pb-2 font-bold">MONTH</p>
+            <p className={`pb-2 font-bold ${labelErrorColorMonth}`}>MONTH</p>
             <input
               type="number"
-              className={`border-2 rounded h-8 pl-5 py-5 text-lg font-bold text-black hover:border-black`}
+              className={`border-2 rounded h-8 pl-5 py-5 text-lg font-bold text-black focus:outline-none focus:ring focus:ring-black ${borderErrorColorMonth}`}
               placeholder="MM"
               value={month}
               onChange={handleMonthChange}
@@ -115,10 +131,10 @@ function App() {
             <p className="py-1 text-red-500">{monthError}</p>
           </div>
           <div className="text-xs">
-            <p className="pb-2 font-bold">YEAR</p>
+            <p className={`pb-2 font-bold ${labelErrorColorYear}`}>YEAR</p>
             <input
               type="number"
-              className={`border-2 rounded h-8 pl-5 py-5 text-lg font-bold text-black hover:border-black`}
+              className={`border-2 rounded h-8 pl-5 py-5 text-lg font-bold text-black focus:outline-none focus:ring focus:ring-black ${borderErrorColorYear}`}
               placeholder="YYYY"
               value={year}
               onChange={handleYearChange}
