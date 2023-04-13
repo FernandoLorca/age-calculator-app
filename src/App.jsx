@@ -6,11 +6,6 @@ function App() {
   const [month, setMonth] = useState('');
   const [year, setYear] = useState('');
 
-  // actualizador de estados del valor de los input que el usuario ingresó
-  const handleDayChange = e => setDay(e.target.value);
-  const handleMonthChange = e => setMonth(e.target.value);
-  const handleYearChange = e => setYear(e.target.value);
-
   // manejador de estados del resultado del calculo de la edad
   const [dayResult, setDayResult] = useState('');
   const [monthResult, setMonthResult] = useState('');
@@ -22,11 +17,17 @@ function App() {
   const monthNow = dateNow.getMonth() + 1;
   const yearNow = dateNow.getFullYear();
 
-  // Creacion del objeto date en donde alojamos los valores ingresados por el cliente
+  // creacion del objeto date en donde alojamos los valores ingresados por el cliente
   const dateBirth = new Date(year, month - 1, day);
   const dayBirth = dateBirth.getDate();
   const monthBirth = dateBirth.getMonth() + 1;
   const yearBirth = dateBirth.getFullYear();
+
+  // estados que validarán que los campos tengan datos en los input
+  const [dayError, setdayError] = useState('');
+  const [monthError, setmonthError] = useState('');
+  const [yearError, setyearError] = useState('');
+  const [borderInputError, setborderInputError] = useState('border-slate-200');
 
   // función que calcula año, mes y día de vida
   const handleCalculateAge = () => {
@@ -42,35 +43,32 @@ function App() {
     <div className="flex justify-center items-center h-screen text-slate-700">
       <div className="bg-white p-10 card">
         <div className="flex gap-5">
-          <div className="uppercase text-xs">
-            <p className="pb-2 font-bold">Day</p>
+          <div className="text-xs">
+            <p className="pb-2 font-bold">DAY</p>
             <input
               type="number"
-              className="border-2 rounded h-8 pl-5 py-5 text-lg font-bold text-black hover:border-black"
+              className={`border-2 rounded h-8 pl-5 py-5 text-lg font-bold text-black hover:border-black ${borderInputError}`}
               placeholder="DD"
-              value={day}
-              onChange={handleDayChange}
             />
+            <p className="py-1 text-red-500">{dayError}</p>
           </div>
-          <div className="uppercase text-xs">
-            <p className="pb-2 font-bold">Month</p>
+          <div className="text-xs">
+            <p className="pb-2 font-bold">MONTH</p>
             <input
               type="number"
-              className="border-2 rounded h-8 pl-5 py-5 text-lg font-bold text-black hover:border-black"
+              className={`border-2 rounded h-8 pl-5 py-5 text-lg font-bold text-black hover:border-black ${borderInputError}`}
               placeholder="MM"
-              value={month}
-              onChange={handleMonthChange}
             />
+            <p className="py-1 text-red-500">{monthError}</p>
           </div>
-          <div className="uppercase text-xs">
-            <p className="pb-2 font-bold">Year</p>
+          <div className="text-xs">
+            <p className="pb-2 font-bold">YEAR</p>
             <input
               type="number"
-              className="border-2 rounded h-8 pl-5 py-5 text-lg font-bold text-black hover:border-black"
+              className={`border-2 rounded h-8 pl-5 py-5 text-lg font-bold text-black hover:border-black ${borderInputError}`}
               placeholder="YYYY"
-              value={year}
-              onChange={handleYearChange}
             />
+            <p className="py-1 text-red-500">{yearError}</p>
           </div>
         </div>
         <div className="flex items-center my-5">
