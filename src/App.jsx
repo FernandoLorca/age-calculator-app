@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 function App() {
   // manejadores de estados de los input
@@ -96,6 +96,37 @@ function App() {
 
   // función que calcula año, mes y día de vida
   const handleCalculateAge = () => {
+    if (day === '') {
+      setDayError('This field is requiered');
+      setBorderErrorColorDay('border-red-500 focus:ring focus:ring-red-500');
+      return setlabelErrorColorDay('text-red-500');
+    }
+    if (day > maxDayPosible) {
+      setDayError('Must be a valid day');
+      setBorderErrorColorDay('border-red-500 focus:ring focus:ring-red-500');
+      return setlabelErrorColorDay('text-red-500');
+    }
+    if (month === '') {
+      setMonthError('This field is requiered');
+      setBorderErrorColorMonth('border-red-500 focus:ring focus:ring-red-500');
+      return setlabelErrorColorMonth('text-red-500');
+    }
+    if (month > maxMonthPosible) {
+      setMonthError('Must be a valid month');
+      setBorderErrorColorMonth('border-red-500 focus:ring focus:ring-red-500');
+      return setlabelErrorColorMonth('text-red-500');
+    }
+    if (year === '') {
+      setYearError('This field is requiered');
+      setBorderErrorColorDaYear('border-red-500 focus:ring focus:ring-red-500');
+      return setlabelErrorColorYear('text-red-500');
+    }
+    if (year > maxYearPosible) {
+      setYearError('Must be in the past');
+      setBorderErrorColorDaYear('border-red-500 focus:ring focus:ring-red-500');
+      return setlabelErrorColorYear('text-red-500');
+    }
+
     setDayResult(dayBirth - monthNow);
     setMonthResult(monthBirth - monthNow);
 
