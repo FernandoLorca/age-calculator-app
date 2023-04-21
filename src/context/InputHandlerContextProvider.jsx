@@ -1,11 +1,26 @@
-import { createContext, useState } from 'react';
+import { AgeCalculatorContext } from './ageCalculatorContextProvider';
+
+import { createContext, useContext, useState } from 'react';
 
 export const InputHandlerContext = createContext();
 
 const InputHandlerContextProvider = ({ children }) => {
-  const [day, setDay] = useState('');
-  const [month, setMonth] = useState('');
-  const [year, setYear] = useState('');
+  const {
+    day,
+    month,
+    year,
+    setDay,
+    setMonth,
+    setYear,
+    dayResult,
+    monthResult,
+    yearResult,
+    maxDayPosible,
+    maxMonthPosible,
+    maxYearPosible,
+    handleCalculateAge,
+  } = useContext(AgeCalculatorContext);
+
   const [dayError, setDayError] = useState('');
   const [monthError, setMonthError] = useState('');
   const [yearError, setYearError] = useState('');
@@ -16,14 +31,8 @@ const InputHandlerContextProvider = ({ children }) => {
   const [labelErrorColorMonth, setLabelErrorColorMonth] = useState('');
   const [labelErrorColorYear, setLabelErrorColorYear] = useState('');
 
-  const dateNow = new Date();
-  const maxDayPosible = 31;
-  const maxMonthPosible = 12;
-  const maxYearPosible = dateNow.getFullYear();
-
   const handleDayChange = e => {
     const value = e.target.value;
-
     if (value === '') {
       setDayError('This field is requiered');
       setBorderErrorColorDay('border-red-500 focus:ring focus:ring-red-500');
@@ -42,7 +51,6 @@ const InputHandlerContextProvider = ({ children }) => {
   };
   const handleMonthChange = e => {
     const value = e.target.value;
-
     if (value === '') {
       setMonthError('This field is requiered');
       setBorderErrorColorMonth('border-red-500 focus:ring focus:ring-red-500');
@@ -61,7 +69,6 @@ const InputHandlerContextProvider = ({ children }) => {
   };
   const handleYearChange = e => {
     const value = e.target.value;
-
     if (value === '') {
       setYearError('This field is requiered');
       setBorderErrorColorYear('border-red-500 focus:ring focus:ring-red-500');
@@ -85,6 +92,9 @@ const InputHandlerContextProvider = ({ children }) => {
         day,
         month,
         year,
+        dayResult,
+        monthResult,
+        yearResult,
         dayError,
         monthError,
         yearError,
@@ -97,7 +107,7 @@ const InputHandlerContextProvider = ({ children }) => {
         handleDayChange,
         handleMonthChange,
         handleYearChange,
-        dateNow,
+        handleCalculateAge,
       }}
     >
       {children}

@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 
 import { InputHandlerContext } from './context/InputHandlerContextProvider';
 
@@ -7,6 +7,9 @@ function App() {
     day,
     month,
     year,
+    dayResult,
+    monthResult,
+    yearResult,
     dayError,
     monthError,
     yearError,
@@ -19,145 +22,66 @@ function App() {
     handleDayChange,
     handleMonthChange,
     handleYearChange,
-    dateNow,
+    handleCalculateAge,
   } = useContext(InputHandlerContext);
 
-  // manejadores de valores de los input
-  // const [day, setDay] = useState('');
-  // const [month, setMonth] = useState('');
-  // const [year, setYear] = useState('');
-
   // manejador de estados del resultado del calculo de la edad
-  const [dayResult, setDayResult] = useState('');
-  const [monthResult, setMonthResult] = useState('');
-  const [yearResult, setYearResult] = useState('');
+  // const [dayResult, setDayResult] = useState('');
+  // const [monthResult, setMonthResult] = useState('');
+  // const [yearResult, setYearResult] = useState('');
 
   // creación del objeto date que nos trae las fechas actuales
   // const dateNow = new Date();
-  const dayNow = dateNow.getDate();
-  const monthNow = dateNow.getMonth() + 1;
-  const yearNow = dateNow.getFullYear();
+  // const dayNow = dateNow.getDate();
+  // const monthNow = dateNow.getMonth() + 1;
+  // const yearNow = dateNow.getFullYear();
 
   // creacion del objeto date en donde alojamos los valores ingresados por el cliente
-  const dateBirth = new Date(year, month - 1, day);
-  const dayBirth = dateBirth.getDate();
-  const monthBirth = dateBirth.getMonth() + 1;
-  const yearBirth = dateBirth.getFullYear();
-
-  // estados donde se guardaran los errores generados en los input
-  // const [dayError, setDayError] = useState('');
-  // const [monthError, setMonthError] = useState('');
-  // const [yearError, setYearError] = useState('');
-  // const [borderErrorColorDay, setBorderErrorColorDay] = useState('');
-  // const [borderErrorColorMonth, setBorderErrorColorMonth] = useState('');
-  // const [borderErrorColorYear, setBorderErrorColorYear] = useState('');
-  // const [labelErrorColorDay, setLabelErrorColorDay] = useState('');
-  // const [labelErrorColorMonth, setLabelErrorColorMonth] = useState('');
-  // const [labelErrorColorYear, setLabelErrorColorYear] = useState('');
-
-  // funciones que validan errores en los input
-  // const maxDayPosible = 31;
-  // const maxMonthPosible = 12;
-  // const maxYearPosible = dateNow.getFullYear();
-
-  // const handleDayChange = e => {
-  //   const value = e.target.value;
-
-  //   if (value === '') {
-  //     setDayError('This field is requiered');
-  //     setBorderErrorColorDay('border-red-500 focus:ring focus:ring-red-500');
-  //     setLabelErrorColorDay('text-red-500');
-  //   } else if (value > maxDayPosible || value <= 0) {
-  //     setDayError('Must be a valid day');
-  //     setBorderErrorColorDay('border-red-500 focus:ring focus:ring-red-500');
-  //     setLabelErrorColorDay('text-red-500');
-  //   } else {
-  //     setDayError('');
-  //     setBorderErrorColorDay('focus:ring-black');
-  //     setLabelErrorColorDay('text-slate-700');
-  //   }
-
-  //   setDay(value);
-  // };
-  // const handleMonthChange = e => {
-  //   const value = e.target.value;
-
-  //   if (value === '') {
-  //     setMonthError('This field is requiered');
-  //     setBorderErrorColorMonth('border-red-500 focus:ring focus:ring-red-500');
-  //     setLabelErrorColorMonth('text-red-500');
-  //   } else if (value > maxMonthPosible || value <= 0) {
-  //     setMonthError('Must be a valid month');
-  //     setBorderErrorColorMonth('border-red-500 focus:ring focus:ring-red-500');
-  //     setLabelErrorColorMonth('text-red-500');
-  //   } else {
-  //     setMonthError('');
-  //     setBorderErrorColorMonth('focus:ring-black');
-  //     setLabelErrorColorMonth('text-slate-700');
-  //   }
-
-  //   setMonth(value);
-  // };
-  // const handleYearChange = e => {
-  //   const value = e.target.value;
-
-  //   if (value === '') {
-  //     setYearError('This field is requiered');
-  //     setBorderErrorColorYear('border-red-500 focus:ring focus:ring-red-500');
-  //     setLabelErrorColorYear('text-red-500');
-  //   } else if (value >= maxYearPosible || value <= 0) {
-  //     setYearError('Must be in the past');
-  //     setBorderErrorColorYear('border-red-500 focus:ring focus:ring-red-500');
-  //     setLabelErrorColorYear('text-red-500');
-  //   } else {
-  //     setYearError('');
-  //     setBorderErrorColorYear('focus:ring-black');
-  //     setLabelErrorColorYear('text-slate-700');
-  //   }
-
-  //   setYear(value);
-  // };
+  // const dateBirth = new Date(year, month - 1, day);
+  // const dayBirth = dateBirth.getDate();
+  // const monthBirth = dateBirth.getMonth() + 1;
+  // const yearBirth = dateBirth.getFullYear();
 
   // función que calcula año, mes y día de vida
-  const handleCalculateAge = () => {
-    switch ((day, month, year)) {
-      case day === '':
-        setDayError('This field is requiered');
-        setBorderErrorColorDay('border-red-500 focus:ring focus:ring-red-500');
-        return setLabelErrorColorDay('text-red-500');
-      case day > maxDayPosible || day <= 0:
-        setDayError('Must be a valid day');
-        setBorderErrorColorDay('border-red-500 focus:ring focus:ring-red-500');
-        return setLabelErrorColorDay('text-red-500');
-      case month === '':
-        setMonthError('This field is requiered');
-        setBorderErrorColorMonth(
-          'border-red-500 focus:ring focus:ring-red-500'
-        );
-        return setLabelErrorColorMonth('text-red-500');
-      case month > maxMonthPosible || month <= 0:
-        setMonthError('Must be a valid month');
-        setBorderErrorColorMonth(
-          'border-red-500 focus:ring focus:ring-red-500'
-        );
-        return setLabelErrorColorMonth('text-red-500');
-      case year === '':
-        setYearError('This field is requiered');
-        setBorderErrorColorYear('border-red-500 focus:ring focus:ring-red-500');
-        return setLabelErrorColorYear('text-red-500');
-      case year > maxYearPosible || year <= 0:
-        setYearError('Must be in the past');
-        setBorderErrorColorYear('border-red-500 focus:ring focus:ring-red-500');
-        return setLabelErrorColorYear('text-red-500');
-    }
+  // const handleCalculateAge = () => {
+  //   switch ((day, month, year)) {
+  //     case day === '':
+  //       setDayError('This field is requiered');
+  //       setBorderErrorColorDay('border-red-500 focus:ring focus:ring-red-500');
+  //       return setLabelErrorColorDay('text-red-500');
+  //     case day > maxDayPosible || day <= 0:
+  //       setDayError('Must be a valid day');
+  //       setBorderErrorColorDay('border-red-500 focus:ring focus:ring-red-500');
+  //       return setLabelErrorColorDay('text-red-500');
+  //     case month === '':
+  //       setMonthError('This field is requiered');
+  //       setBorderErrorColorMonth(
+  //         'border-red-500 focus:ring focus:ring-red-500'
+  //       );
+  //       return setLabelErrorColorMonth('text-red-500');
+  //     case month > maxMonthPosible || month <= 0:
+  //       setMonthError('Must be a valid month');
+  //       setBorderErrorColorMonth(
+  //         'border-red-500 focus:ring focus:ring-red-500'
+  //       );
+  //       return setLabelErrorColorMonth('text-red-500');
+  //     case year === '':
+  //       setYearError('This field is requiered');
+  //       setBorderErrorColorYear('border-red-500 focus:ring focus:ring-red-500');
+  //       return setLabelErrorColorYear('text-red-500');
+  //     case year > maxYearPosible || year <= 0:
+  //       setYearError('Must be in the past');
+  //       setBorderErrorColorYear('border-red-500 focus:ring focus:ring-red-500');
+  //       return setLabelErrorColorYear('text-red-500');
+  //   }
 
-    setDayResult(dayBirth - monthNow);
-    setMonthResult(monthBirth - monthNow);
+  //   setDayResult(dayBirth - monthNow);
+  //   setMonthResult(monthBirth - monthNow);
 
-    if (monthNow < monthBirth) setYearResult(yearNow - yearBirth - 1);
-    if (monthNow === monthBirth && dayNow < dayBirth)
-      setYearResult(yearNow - yearBirth - 1);
-  };
+  //   if (monthNow < monthBirth) setYearResult(yearNow - yearBirth - 1);
+  //   if (monthNow === monthBirth && dayNow < dayBirth)
+  //     setYearResult(yearNow - yearBirth - 1);
+  // };
 
   return (
     <div className="flex justify-center items-center h-screen text-slate-700">
