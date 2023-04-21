@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 function App() {
-  // manejadores de estados de los input
+  // manejadores de valores de los input
   const [day, setDay] = useState('');
   const [month, setMonth] = useState('');
   const [year, setYear] = useState('');
@@ -29,10 +29,10 @@ function App() {
   const [yearError, setYearError] = useState('');
   const [borderErrorColorDay, setBorderErrorColorDay] = useState('');
   const [borderErrorColorMonth, setBorderErrorColorMonth] = useState('');
-  const [borderErrorColorYear, setBorderErrorColorDaYear] = useState('');
-  const [labelErrorColorDay, setlabelErrorColorDay] = useState('');
-  const [labelErrorColorMonth, setlabelErrorColorMonth] = useState('');
-  const [labelErrorColorYear, setlabelErrorColorYear] = useState('');
+  const [borderErrorColorYear, setBorderErrorColorYear] = useState('');
+  const [labelErrorColorDay, setLabelErrorColorDay] = useState('');
+  const [labelErrorColorMonth, setLabelErrorColorMonth] = useState('');
+  const [labelErrorColorYear, setLabelErrorColorYear] = useState('');
 
   // funciones que validan errores en los input
   const maxDayPosible = 31;
@@ -41,90 +41,93 @@ function App() {
 
   const handleDayChange = e => {
     const value = e.target.value;
-    setDay(value);
 
     if (value === '') {
       setDayError('This field is requiered');
       setBorderErrorColorDay('border-red-500 focus:ring focus:ring-red-500');
-      setlabelErrorColorDay('text-red-500');
+      setLabelErrorColorDay('text-red-500');
     } else if (value > maxDayPosible || value <= 0) {
       setDayError('Must be a valid day');
       setBorderErrorColorDay('border-red-500 focus:ring focus:ring-red-500');
-      setlabelErrorColorDay('text-red-500');
+      setLabelErrorColorDay('text-red-500');
     } else {
       setDayError('');
       setBorderErrorColorDay('focus:ring-black');
-      setlabelErrorColorDay('text-slate-700');
+      setLabelErrorColorDay('text-slate-700');
     }
+
+    setDay(value);
   };
   const handleMonthChange = e => {
     const value = e.target.value;
-    setMonth(value);
 
     if (value === '') {
       setMonthError('This field is requiered');
       setBorderErrorColorMonth('border-red-500 focus:ring focus:ring-red-500');
-      setlabelErrorColorMonth('text-red-500');
+      setLabelErrorColorMonth('text-red-500');
     } else if (value > maxMonthPosible || value <= 0) {
       setMonthError('Must be a valid month');
       setBorderErrorColorMonth('border-red-500 focus:ring focus:ring-red-500');
-      setlabelErrorColorMonth('text-red-500');
+      setLabelErrorColorMonth('text-red-500');
     } else {
       setMonthError('');
       setBorderErrorColorMonth('focus:ring-black');
-      setlabelErrorColorMonth('text-slate-700');
+      setLabelErrorColorMonth('text-slate-700');
     }
+
+    setMonth(value);
   };
   const handleYearChange = e => {
     const value = e.target.value;
-    setYear(value);
 
     if (value === '') {
       setYearError('This field is requiered');
-      setBorderErrorColorDaYear('border-red-500 focus:ring focus:ring-red-500');
-      setlabelErrorColorYear('text-red-500');
+      setBorderErrorColorYear('border-red-500 focus:ring focus:ring-red-500');
+      setLabelErrorColorYear('text-red-500');
     } else if (value >= maxYearPosible || value <= 0) {
       setYearError('Must be in the past');
-      setBorderErrorColorDaYear('border-red-500 focus:ring focus:ring-red-500');
-      setlabelErrorColorYear('text-red-500');
+      setBorderErrorColorYear('border-red-500 focus:ring focus:ring-red-500');
+      setLabelErrorColorYear('text-red-500');
     } else {
       setYearError('');
-      setBorderErrorColorDaYear('focus:ring-black');
-      setlabelErrorColorYear('text-slate-700');
+      setBorderErrorColorYear('focus:ring-black');
+      setLabelErrorColorYear('text-slate-700');
     }
+
+    setYear(value);
   };
 
   // función que calcula año, mes y día de vida
   const handleCalculateAge = () => {
-    if (day === '') {
-      setDayError('This field is requiered');
-      setBorderErrorColorDay('border-red-500 focus:ring focus:ring-red-500');
-      return setlabelErrorColorDay('text-red-500');
-    }
-    if (day > maxDayPosible || day <= 0) {
-      setDayError('Must be a valid day');
-      setBorderErrorColorDay('border-red-500 focus:ring focus:ring-red-500');
-      return setlabelErrorColorDay('text-red-500');
-    }
-    if (month === '') {
-      setMonthError('This field is requiered');
-      setBorderErrorColorMonth('border-red-500 focus:ring focus:ring-red-500');
-      return setlabelErrorColorMonth('text-red-500');
-    }
-    if (month > maxMonthPosible || month <= 0) {
-      setMonthError('Must be a valid month');
-      setBorderErrorColorMonth('border-red-500 focus:ring focus:ring-red-500');
-      return setlabelErrorColorMonth('text-red-500');
-    }
-    if (year === '') {
-      setYearError('This field is requiered');
-      setBorderErrorColorDaYear('border-red-500 focus:ring focus:ring-red-500');
-      return setlabelErrorColorYear('text-red-500');
-    }
-    if (year > maxYearPosible || year <= 0) {
-      setYearError('Must be in the past');
-      setBorderErrorColorDaYear('border-red-500 focus:ring focus:ring-red-500');
-      return setlabelErrorColorYear('text-red-500');
+    switch ((day, month, year)) {
+      case day === '':
+        setDayError('This field is requiered');
+        setBorderErrorColorDay('border-red-500 focus:ring focus:ring-red-500');
+        return setLabelErrorColorDay('text-red-500');
+      case day > maxDayPosible || day <= 0:
+        setDayError('Must be a valid day');
+        setBorderErrorColorDay('border-red-500 focus:ring focus:ring-red-500');
+        return setLabelErrorColorDay('text-red-500');
+      case month === '':
+        setMonthError('This field is requiered');
+        setBorderErrorColorMonth(
+          'border-red-500 focus:ring focus:ring-red-500'
+        );
+        return setLabelErrorColorMonth('text-red-500');
+      case month > maxMonthPosible || month <= 0:
+        setMonthError('Must be a valid month');
+        setBorderErrorColorMonth(
+          'border-red-500 focus:ring focus:ring-red-500'
+        );
+        return setLabelErrorColorMonth('text-red-500');
+      case year === '':
+        setYearError('This field is requiered');
+        setBorderErrorColorYear('border-red-500 focus:ring focus:ring-red-500');
+        return setLabelErrorColorYear('text-red-500');
+      case year > maxYearPosible || year <= 0:
+        setYearError('Must be in the past');
+        setBorderErrorColorYear('border-red-500 focus:ring focus:ring-red-500');
+        return setLabelErrorColorYear('text-red-500');
     }
 
     setDayResult(dayBirth - monthNow);
