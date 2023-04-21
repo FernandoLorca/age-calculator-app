@@ -1,10 +1,31 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+
+import { InputHandlerContext } from './context/InputHandlerContextProvider';
 
 function App() {
+  const {
+    day,
+    month,
+    year,
+    dayError,
+    monthError,
+    yearError,
+    borderErrorColorDay,
+    borderErrorColorMonth,
+    borderErrorColorYear,
+    labelErrorColorDay,
+    labelErrorColorMonth,
+    labelErrorColorYear,
+    handleDayChange,
+    handleMonthChange,
+    handleYearChange,
+    dateNow,
+  } = useContext(InputHandlerContext);
+
   // manejadores de valores de los input
-  const [day, setDay] = useState('');
-  const [month, setMonth] = useState('');
-  const [year, setYear] = useState('');
+  // const [day, setDay] = useState('');
+  // const [month, setMonth] = useState('');
+  // const [year, setYear] = useState('');
 
   // manejador de estados del resultado del calculo de la edad
   const [dayResult, setDayResult] = useState('');
@@ -12,7 +33,7 @@ function App() {
   const [yearResult, setYearResult] = useState('');
 
   // creación del objeto date que nos trae las fechas actuales
-  const dateNow = new Date();
+  // const dateNow = new Date();
   const dayNow = dateNow.getDate();
   const monthNow = dateNow.getMonth() + 1;
   const yearNow = dateNow.getFullYear();
@@ -24,78 +45,78 @@ function App() {
   const yearBirth = dateBirth.getFullYear();
 
   // estados donde se guardaran los errores generados en los input
-  const [dayError, setDayError] = useState('');
-  const [monthError, setMonthError] = useState('');
-  const [yearError, setYearError] = useState('');
-  const [borderErrorColorDay, setBorderErrorColorDay] = useState('');
-  const [borderErrorColorMonth, setBorderErrorColorMonth] = useState('');
-  const [borderErrorColorYear, setBorderErrorColorYear] = useState('');
-  const [labelErrorColorDay, setLabelErrorColorDay] = useState('');
-  const [labelErrorColorMonth, setLabelErrorColorMonth] = useState('');
-  const [labelErrorColorYear, setLabelErrorColorYear] = useState('');
+  // const [dayError, setDayError] = useState('');
+  // const [monthError, setMonthError] = useState('');
+  // const [yearError, setYearError] = useState('');
+  // const [borderErrorColorDay, setBorderErrorColorDay] = useState('');
+  // const [borderErrorColorMonth, setBorderErrorColorMonth] = useState('');
+  // const [borderErrorColorYear, setBorderErrorColorYear] = useState('');
+  // const [labelErrorColorDay, setLabelErrorColorDay] = useState('');
+  // const [labelErrorColorMonth, setLabelErrorColorMonth] = useState('');
+  // const [labelErrorColorYear, setLabelErrorColorYear] = useState('');
 
   // funciones que validan errores en los input
-  const maxDayPosible = 31;
-  const maxMonthPosible = 12;
-  const maxYearPosible = dateNow.getFullYear();
+  // const maxDayPosible = 31;
+  // const maxMonthPosible = 12;
+  // const maxYearPosible = dateNow.getFullYear();
 
-  const handleDayChange = e => {
-    const value = e.target.value;
+  // const handleDayChange = e => {
+  //   const value = e.target.value;
 
-    if (value === '') {
-      setDayError('This field is requiered');
-      setBorderErrorColorDay('border-red-500 focus:ring focus:ring-red-500');
-      setLabelErrorColorDay('text-red-500');
-    } else if (value > maxDayPosible || value <= 0) {
-      setDayError('Must be a valid day');
-      setBorderErrorColorDay('border-red-500 focus:ring focus:ring-red-500');
-      setLabelErrorColorDay('text-red-500');
-    } else {
-      setDayError('');
-      setBorderErrorColorDay('focus:ring-black');
-      setLabelErrorColorDay('text-slate-700');
-    }
+  //   if (value === '') {
+  //     setDayError('This field is requiered');
+  //     setBorderErrorColorDay('border-red-500 focus:ring focus:ring-red-500');
+  //     setLabelErrorColorDay('text-red-500');
+  //   } else if (value > maxDayPosible || value <= 0) {
+  //     setDayError('Must be a valid day');
+  //     setBorderErrorColorDay('border-red-500 focus:ring focus:ring-red-500');
+  //     setLabelErrorColorDay('text-red-500');
+  //   } else {
+  //     setDayError('');
+  //     setBorderErrorColorDay('focus:ring-black');
+  //     setLabelErrorColorDay('text-slate-700');
+  //   }
 
-    setDay(value);
-  };
-  const handleMonthChange = e => {
-    const value = e.target.value;
+  //   setDay(value);
+  // };
+  // const handleMonthChange = e => {
+  //   const value = e.target.value;
 
-    if (value === '') {
-      setMonthError('This field is requiered');
-      setBorderErrorColorMonth('border-red-500 focus:ring focus:ring-red-500');
-      setLabelErrorColorMonth('text-red-500');
-    } else if (value > maxMonthPosible || value <= 0) {
-      setMonthError('Must be a valid month');
-      setBorderErrorColorMonth('border-red-500 focus:ring focus:ring-red-500');
-      setLabelErrorColorMonth('text-red-500');
-    } else {
-      setMonthError('');
-      setBorderErrorColorMonth('focus:ring-black');
-      setLabelErrorColorMonth('text-slate-700');
-    }
+  //   if (value === '') {
+  //     setMonthError('This field is requiered');
+  //     setBorderErrorColorMonth('border-red-500 focus:ring focus:ring-red-500');
+  //     setLabelErrorColorMonth('text-red-500');
+  //   } else if (value > maxMonthPosible || value <= 0) {
+  //     setMonthError('Must be a valid month');
+  //     setBorderErrorColorMonth('border-red-500 focus:ring focus:ring-red-500');
+  //     setLabelErrorColorMonth('text-red-500');
+  //   } else {
+  //     setMonthError('');
+  //     setBorderErrorColorMonth('focus:ring-black');
+  //     setLabelErrorColorMonth('text-slate-700');
+  //   }
 
-    setMonth(value);
-  };
-  const handleYearChange = e => {
-    const value = e.target.value;
+  //   setMonth(value);
+  // };
+  // const handleYearChange = e => {
+  //   const value = e.target.value;
 
-    if (value === '') {
-      setYearError('This field is requiered');
-      setBorderErrorColorYear('border-red-500 focus:ring focus:ring-red-500');
-      setLabelErrorColorYear('text-red-500');
-    } else if (value >= maxYearPosible || value <= 0) {
-      setYearError('Must be in the past');
-      setBorderErrorColorYear('border-red-500 focus:ring focus:ring-red-500');
-      setLabelErrorColorYear('text-red-500');
-    } else {
-      setYearError('');
-      setBorderErrorColorYear('focus:ring-black');
-      setLabelErrorColorYear('text-slate-700');
-    }
+  //   if (value === '') {
+  //     setYearError('This field is requiered');
+  //     setBorderErrorColorYear('border-red-500 focus:ring focus:ring-red-500');
+  //     setLabelErrorColorYear('text-red-500');
+  //   } else if (value >= maxYearPosible || value <= 0) {
+  //     setYearError('Must be in the past');
+  //     setBorderErrorColorYear('border-red-500 focus:ring focus:ring-red-500');
+  //     setLabelErrorColorYear('text-red-500');
+  //   } else {
+  //     setYearError('');
+  //     setBorderErrorColorYear('focus:ring-black');
+  //     setLabelErrorColorYear('text-slate-700');
+  //   }
 
-    setYear(value);
-  };
+  //   setYear(value);
+  // };
 
   // función que calcula año, mes y día de vida
   const handleCalculateAge = () => {
