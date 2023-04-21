@@ -1,4 +1,10 @@
-const CalculateAge = ({ handleCalculateAge }) => {
+import { useContext } from 'react';
+
+import { InputHandlerContext } from '../../context/InputHandlerContextProvider';
+
+const CalculateAge = () => {
+  const { handleCalculateAge } = useContext(InputHandlerContext);
+
   return (
     <div className="flex items-center my-5">
       <div className="h-1 bg-slate-100 w-full"></div>
