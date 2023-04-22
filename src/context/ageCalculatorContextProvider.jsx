@@ -24,7 +24,6 @@ const AgeCalculatorContextProvider = ({ children }) => {
   const maxDayPosible = 31;
   const maxMonthPosible = 12;
   const maxYearPosible = dateNow.getFullYear();
-
   const handleCalculateAge = () => {
     switch ((day, month, year)) {
       case day === '':
@@ -56,7 +55,6 @@ const AgeCalculatorContextProvider = ({ children }) => {
         setBorderErrorColorYear('border-red-500 focus:ring focus:ring-red-500');
         return setLabelErrorColorYear('text-red-500');
     }
-
     setDayResult(dayBirth - monthNow);
     setMonthResult(monthBirth - monthNow);
 
@@ -64,6 +62,8 @@ const AgeCalculatorContextProvider = ({ children }) => {
     if (monthNow === monthBirth && dayNow < dayBirth)
       setYearResult(yearNow - yearBirth - 1);
   };
+
+  console.log((yearNow - 1 - yearBirth) * 12);
 
   return (
     <AgeCalculatorContext.Provider
