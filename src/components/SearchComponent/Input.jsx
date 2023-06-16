@@ -12,7 +12,7 @@ const Input = ({
       <p className={`pb-2 font-bold ${labelErrorColor}`}>{text}</p>
       <input
         type="number"
-        className={`border-2 rounded h-8 pl-5 py-5 text-lg font-bold text-black focus:outline-none focus:ring focus:ring-black ${borderErrorColor}`}
+        className={`border-2 rounded w-full lg: h-8 pl-5 py-5 text-lg font-bold text-black focus:outline-none focus:ring focus:ring-black ${borderErrorColor}`}
         placeholder={placeholder}
         value={value}
         onChange={onChange}

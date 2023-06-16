@@ -22,8 +22,8 @@ const SearchComponent = () => {
     handleYearChange,
   } = useContext(InputHandlerContext);
   return (
-    <div className="flex gap-5">
-      <div className="text-xs">
+    <div className="flex flex-col lg:flex-row lg:justify-between gap-5">
+      <div className="text-xs w-full">
         <Input
           text="DAY"
           placeholder="DD"
@@ -34,7 +34,7 @@ const SearchComponent = () => {
           error={dayError}
         />
       </div>
-      <div className="text-xs">
+      <div className="text-xs w-full">
         <Input
           text="MONTH"
           placeholder="MM"
@@ -45,7 +45,7 @@ const SearchComponent = () => {
           error={monthError}
         />
       </div>
-      <div className="text-xs">
+      <div className="text-xs w-full">
         <Input
           text="YEAR"
           placeholder="YYYY"
